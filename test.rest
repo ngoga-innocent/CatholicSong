@@ -1,0 +1,38 @@
+POST http://localhost:8000/account/Register
+Content-Type: application/json
+
+{"username":"Ngoga","password":"Ngoga","email":"ngogainncent@gmail.com"}
+###
+
+POST http://localhost:8000/account/Login
+Content-Type: application/json
+
+{"username":"Ngoga","password":"Ngoga@1patrick"}
+
+###
+
+GET http://localhost:8000/account/TokenVerification
+Content-Type: application/json
+Authorization: Token 50a29e44715e752445c4984325560aaa879ecc85
+
+###
+PUT  http://localhost:8000/account/reset_password
+Content-Type: application/json
+
+{"username":"Ngoga","password":"Ngoga@1patrick"}
+
+###
+GET http://localhost:8000/documents/
+Content-Type: application/json
+
+### delete Copy
+
+DELETE  http://localhost:8000/documents/?copy_id=2abeb669-55bb-4980-9a53-60a1af95ee7c
+Content-Type: application/json
+
+###
+PATCH http://localhost:8000/documents/?copy_id=38753c7d-ccaa-494d-9340-5664cb645332
+Content-Type: application/json
+
+{"name":"Mpa Kunyurwa","composer":"Uyisenga Aristide"}
+
