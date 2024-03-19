@@ -36,3 +36,10 @@ Content-Type: application/json
 
 {"name":"Mpa Kunyurwa","composer":"Uyisenga Aristide"}
 
+#### GET SONG TYPE
+GET http://localhost:8000/documents/Gettypes/
+Content-Type: application/json
+
+### GET SONG OF THE TYPE
+GET http://localhost:8000/documents/Gettypes/?type_id=a66a56b0-13a7-4e6e-bcca-f966738e035d
+Content-Type: application/json
