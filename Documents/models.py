@@ -7,6 +7,7 @@ class SongType(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     name=models.CharField(max_length=255,null=False)
     season=models.CharField(max_length=255,null=True,default='Ibihe Bisanzwe')
+    thumbnail=models.ImageField(upload_to='Song_Type',null=True)
 
     def __str__(self):
         return self.name
