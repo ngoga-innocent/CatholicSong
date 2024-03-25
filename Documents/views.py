@@ -54,13 +54,13 @@ class SongTypeClass(APIView):
             try:
                 type=SongType.objects.get(id=type_id)
                 songs=Copies.objects.filter(category=type)
-                serializer=CopiesSerializer(songs,many=True)
+                serializer=CopiesSerializer(songs,many=True,context={'request':request})
                 return Response({'copies':serializer.data})
             except SongType.DoesNotExist():
                 return Response({'detail':'The Type is not found'})
         else:
             types=SongType.objects.all()
-            serializer=SongTypeSerializer(types,many=True)
+            serializer=SongTypeSerializer(types,many=True,context={'request':request})
             return Response({'types':serializer.data})
 
        
