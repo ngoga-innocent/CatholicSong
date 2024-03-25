@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'rest_framework.authtoken',
     'Accounts',
     'Documents',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -72,7 +74,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'CatholicSongs.wsgi.application'
+CORS_ALLOWED_ORIGINS = []
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH"
+]  
 
+CORS_ALLOW_HEADERS = [
+    "Content-Type",
+    "Authorization",  
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
