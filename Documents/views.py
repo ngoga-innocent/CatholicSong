@@ -10,11 +10,11 @@ class CopiesClass(APIView):
         copy_id = request.query_params.get("copy_id") 
         if copy_id is not None:
             copy=get_object_or_404(Copies,id=copy_id)
-            serializer=CopiesSerializer(instance=copy)
+            serializer=CopiesSerializer(instance=copy,context={"request":request})
             return Response({"copy":serializer.data})
         else:
             copies=Copies.objects.all()
-            serializer=CopiesSerializer(copies,many=True)
+            serializer=CopiesSerializer(copies,many=True,context={"request":request})
             return Response({"copies":serializer.data})
     def post(self,request):
         serializer=CopiesSerializer(data=request.data)
