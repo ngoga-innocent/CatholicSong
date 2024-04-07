@@ -8,6 +8,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from rest_framework.authentication import SessionAuthentication,TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import get_authorization_header
 # Create your views here.
 class RegisterView(APIView):
     def post(self,request):
@@ -28,11 +29,30 @@ class LoginView(APIView):
         token,created=Token.objects.get_or_create(user=user)
         serializer=UserSerializer(instance=user)
         return Response({"token":token.key,"user":serializer.data})
-@api_view(['GET'])
-@authentication_classes([SessionAuthentication,TokenAuthentication])
-@permission_classes([IsAuthenticated])
-def TokenVerification(request):
-    return Response({"user":format(UserSerializer(instance=request.user).data)}) 
+
+def TokenVerification(auth_token):
+    # auth_token=request.META.get('HTTP_AUTHORIZATION')
+    
+    if not auth_token:
+        return Response({'detail':'No token '},status=403)
+    else:
+        try:
+            
+            token_prefix=auth_token.split(' ')[0]
+            
+            if token_prefix.lower() != 'token':
+                return Response({'detail':'invalid token prefix'},status=403)
+            user_token=Token.objects.get(key=auth_token.split(' ')[1])
+            # user=UserSerializer(user_token.user,context={"request":request})
+            # return Response({"user":user.data},status=200)
+            return user_token.user
+        except:
+            return Response({'detail':'invalid Token'},status=403)
+
+# @authentication_classes([SessionAuthentication,TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+# def TokenVerification(request):
+#     return Response({"user":format(UserSerializer(instance=request.user).data)}) 
 
 @api_view(['PUT'])
 def ResetPassword(request):
@@ -44,4 +64,20 @@ def ResetPassword(request):
         return Response({'user':serializer.data})
     except Users.DoesNotExist:
         return Response({'detail':'user Not found'},status=status.HTTP_404_NOT_FOUND)
-    
+@api_view(['PUT'])
+def UpdateProfile(request):
+        auth_token=request.META.get('HTTP_AUTHORIZATION')
+        user = TokenVerification(auth_token)
+        if not user:
+            return Response({'detail':'Please Login'})
+        try:
+            user_object=Users.objects.get(pk=user.id)
+            serializer=UserSerializer(user_object,data=request.data,partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({"detail":serializer.data})
+            else:
+                return Response({"detail":serializer.errors},status=status.HTTP_400_BAD_REQUEST)
+        except Users.DoesNotExist:
+            return Response({'detail':'user not found'},status=status.HTTP_401_UNAUTHORIZED)
+        

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +43,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'Accounts',
     'Documents',
+    'cloudinary',
+    'cloudinary_storage',
+    'Musicians',
+    'Advertise'
 ]
 
 MIDDLEWARE = [
@@ -146,3 +151,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='Accounts.Users'
+CLOUDINARY_STORAGE={
+    'CLOUD_NAME':'dz7v9gwzd',
+    'API_KEY':'782477351883355',
+    "API_SECRET":'n03Zh44PD_N8aawgfpM4_aBImsw'
+}
+DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
+          

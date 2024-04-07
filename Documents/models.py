@@ -17,7 +17,7 @@ class Copies(models.Model):
     name=models.CharField(max_length=255,null=False)
     composer=models.CharField(max_length=255,null=False)
     part=models.CharField(max_length=255,default="Other")
-    uploader=models.ForeignKey(Users,on_delete=models.CASCADE,null=True)
+    uploader=models.ForeignKey(Users,on_delete=models.CASCADE,null=True,default='')
     document=models.FileField(upload_to='songs_docs')
     category=models.ForeignKey(SongType,on_delete=models.CASCADE,null=True,default='')
     def __str__(self):

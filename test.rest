@@ -9,11 +9,15 @@ Content-Type: application/json
 
 {"username":"Ngoga","password":"Ngoga@1patrick"}
 
+## update User Profile
+
+
+
 ###
 
 GET http://localhost:8000/account/TokenVerification
 Content-Type: application/json
-Authorization: Token 50a29e44715e752445c4984325560aaa879ecc85
+Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
 
 ###
 PUT  http://localhost:8000/account/reset_password
@@ -42,4 +46,42 @@ Content-Type: application/json
 
 ### GET SONG OF THE TYPE
 GET http://localhost:8000/documents/Gettypes/?type_id=a66a56b0-13a7-4e6e-bcca-f966738e035d
+Content-Type: application/json
+
+##### GET ALL MUSICIAN 
+GET http://localhost:8000/musician
+Content-Type: application/json
+Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
+
+#### CREATE A MUSICIAN
+POST http://localhost:8000/musician/
+Content-Type: application/json
+Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
+
+{"skills":["866b4dd2-9c32-43ea-a973-24a49c5cffb2"],"description":"hello test ","location":"KIGALI","phone_number":"0782214360"}
+
+##### Edit musician
+PUT  http://localhost:8000/musician/
+Content-Type: application/json
+Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
+
+{"skills":["866b4dd2-9c32-43ea-a973-24a49c5cffb2"],"description":"A bad boy in music ","location":"KIGALI","phone_number":"0782214360"}
+
+##### Edit Profile
+PUT http://localhost:8000/account/update_profile
+Content-Type: application/json
+Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
+
+{"first_name":"Ngoga Innocent"}
+
+##### GET Event
+
+GET http://localhost:8000/advertise
+
+Content-Length: application/json
+
+### GET Trending
+
+GET http://localhost:8000/advertise/trendings
+
 Content-Type: application/json
