@@ -20,7 +20,7 @@ class Adverts(APIView):
                 return Response({"detail":'No event found'},status=status.HTTP_204_NO_CONTENT)
         else:
             event=Event.objects.all()
-            serializer=EventImageSerializer(event,context={"request":request},many=True)
+            serializer=EventSerializer(event,context={"request":request},many=True)
             return Response({'events':serializer.data},status=status.HTTP_200_OK)
 class Trending(APIView):
     def get(self,request):
