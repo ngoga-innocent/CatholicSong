@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import cloudinary_storage
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -102,6 +103,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+DATABASES['default']=dj_database_url.parse("postgres://catholicsongs_user:Y7KZ6imUeD26mPYxI80kfIy7YgfGa4BX@dpg-coboi9tjm4es739spm6g-a.oregon-postgres.render.com/catholicsongs")
 
 
 # Password validation
