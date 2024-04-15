@@ -3,6 +3,7 @@ from .models import Users
 
 
 class UserSerializer(serializers.ModelSerializer):
+    profile=serializers.ImageField()
     class Meta:
         model=Users
         fields=['id','first_name','last_name','email','username','password','musician','profile']

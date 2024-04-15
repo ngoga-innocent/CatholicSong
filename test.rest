@@ -70,9 +70,9 @@ Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
 ##### Edit Profile
 PUT http://localhost:8000/account/update_profile
 Content-Type: application/json
-Authorization: token 50a29e44715e752445c4984325560aaa879ecc85
+Authorization: token 5dae1896b04e6a213931cb24c36cf7661fdc74f9
 
-{"first_name":"Ngoga Innocent"}
+{"first_name":"Ngoga Innocent","password":"Ngoga@1patric"}
 
 ##### GET Event
 
