@@ -16,7 +16,7 @@ class MusicianView(APIView):
         # if not user:
         #     return Response({'error': 'Invalid token or unauthorized access'}, status=status.HTTP_401_UNAUTHORIZED)
         allmusician=MusicianModel.objects.all()
-        serializer=MusicianSerializer(allmusician,many=True)
+        serializer=MusicianSerializer(allmusician,many=True,context={"request":request})
         # user_serializer=UserSerializer(user,context={"request":request})
         return Response({'musician':serializer.data})
     
@@ -57,6 +57,12 @@ class MusicianView(APIView):
                 return Response({"detail":'no Musician of this account Available'},status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response({"detail":'failed to update please try again'},status=status.HTTP_400_BAD_REQUEST)
+
+class MusicalSkills(APIView):
+    def get(self,request):
+        all_skills=MusicSkillChoices.objects.all()
+        serializer=MusicSkillSerializer(all_skills,many=True)
+        return Response({'skills':serializer.data})
 
         
         

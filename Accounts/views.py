@@ -32,7 +32,7 @@ class LoginView(APIView):
 
 def TokenVerification(auth_token):
     # auth_token=request.META.get('HTTP_AUTHORIZATION')
-    
+    print(auth_token)
     if not auth_token:
         return Response({'detail':'No token '},status=403)
     else:
@@ -45,9 +45,10 @@ def TokenVerification(auth_token):
             user_token=Token.objects.get(key=auth_token.split(' ')[1])
             # user=UserSerializer(user_token.user,context={"request":request})
             # return Response({"user":user.data},status=200)
+            print(user_token)
             return user_token.user
         except:
-            return Response({'detail':'invalid Token'},status=403)
+            return Response({'detail':'invalid Token'},status=401)
 
 # @authentication_classes([SessionAuthentication,TokenAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -77,7 +78,24 @@ def UpdateProfile(request):
                 serializer.save()
                 return Response({"detail":serializer.data})
             else:
+                print(serializer.errors)
                 return Response({"detail":serializer.errors},status=status.HTTP_400_BAD_REQUEST)
         except Users.DoesNotExist:
             return Response({'detail':'user not found'},status=status.HTTP_401_UNAUTHORIZED)
+@api_view(['GET'])
+def GetProfile(request):
+    auth_token=request.META.get('HTTP_AUTHORIZATION')
+    user = TokenVerification(auth_token)
+    print(user)
+    if not user:
+        return Response({"detail":'please Login'})
+ 
+    # return Response("ok")
+    
+    try:
+        user_object=Users.objects.get(pk=user.id)
+        serializer=UserSerializer(user_object,context={"request":request})
         
+        return Response({'user':serializer.data})
+    except Users.DoesNotExist:
+        return Response({"detail":"No user found"})
