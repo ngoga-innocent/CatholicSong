@@ -7,7 +7,7 @@ Content-Type: application/json
 POST http://localhost:8000/account/Login
 Content-Type: application/json
 
-{"username":"admin","password":"Ngoga@1patrick"}
+{"username":"Ngoga","password":"Ngoga"}
 
 ## update User Profile
 
@@ -90,5 +90,23 @@ Content-Length: application/json
 ### GET Trending
 
 GET http://localhost:8000/advertise/trendings
+
+Content-Type: application/json
+
+### notification 
+GET http://localhost:8000/notification
+
+Content-Type: application/json
+
+### update notifications
+
+PUT http://localhost:8000/notification/3e7a0163-107f-41b5-923d-c2536e740a05
+Content-Type: application/json
+
+{"read":"true"}
+
+### DELETE Notification
+
+DELETE  http://localhost:8000/notification/3e7a0163-107f-41b5-923d-c2536e740a05
 
 Content-Type: application/json

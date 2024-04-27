@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'Musicians',
-    'Advertise'
+    'Advertise',
+    'Notifications'
 ]
 
 MIDDLEWARE = [

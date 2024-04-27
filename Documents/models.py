@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from Accounts.models import Users
+import os
 # Create your models here.
 
 class SongType(models.Model):
@@ -11,14 +12,22 @@ class SongType(models.Model):
 
     def __str__(self):
         return self.name
-    
+def song_upload_path(instance, filename):
+    # Get the category name
+    category_name = instance.category.name
+    # Replace spaces with underscores and ensure lowercase
+    category_name = category_name.replace(' ', '_').lower()
+    # Generate a unique filename
+    filename = f"{uuid.uuid4().hex}-{filename}"
+    # Return the upload path
+    return os.path.join('songs_docs', category_name,filename)
 class Copies(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     name=models.CharField(max_length=255,null=False)
     composer=models.CharField(max_length=255,null=False)
     part=models.CharField(max_length=255,default="Other")
     uploader=models.ForeignKey(Users,on_delete=models.CASCADE,null=True,default='')
-    document=models.FileField(upload_to='songs_docs')
+    document=models.FileField(upload_to=song_upload_path)
     category=models.ForeignKey(SongType,on_delete=models.CASCADE,null=True,default='')
     def __str__(self):
         return self.name
