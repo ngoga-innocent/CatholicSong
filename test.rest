@@ -7,7 +7,7 @@ Content-Type: application/json
 POST http://localhost:8000/account/Login
 Content-Type: application/json
 
-{"username":"Ngoga","password":"Ngoga"}
+{"username":"Ngoga","password":"Ngoga@1patrick"}
 
 ## update User Profile
 
@@ -110,3 +110,5 @@ Content-Type: application/json
 DELETE  http://localhost:8000/notification/3e7a0163-107f-41b5-923d-c2536e740a05
 
 Content-Type: application/json
+
+GET 

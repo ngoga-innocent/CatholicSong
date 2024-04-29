@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-))-hd$82of4im*82m)nc72_@()a&v=chpso*yp!#inxnwrj+4v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'Musicians',
     'Advertise',
-    'Notifications'
+    'Notifications',
+    'Shorts'
 ]
 
 MIDDLEWARE = [
