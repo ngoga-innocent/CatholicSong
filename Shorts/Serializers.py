@@ -31,3 +31,5 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self,validated_data):
          validated_data['commenter']=self.context['request']
          return Comments.objects.create(**validated_data)
+
+         

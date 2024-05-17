@@ -28,7 +28,23 @@ SECRET_KEY = 'django-insecure-))-hd$82of4im*82m)nc72_@()a&v=chpso*yp!#inxnwrj+4v
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            '/Home'
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 # Application definition
 
@@ -50,7 +66,8 @@ INSTALLED_APPS = [
     'Musicians',
     'Advertise',
     'Notifications',
-    'Shorts'
+    'Shorts',
+    'Home',
 ]
 
 MIDDLEWARE = [
