@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-))-hd$82of4im*82m)nc72_@()a&v=chpso*yp!#inxnwrj+4v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 TEMPLATES = [
@@ -124,7 +124,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default']=dj_database_url.parse("postgres://catholicsongs_user:Y7KZ6imUeD26mPYxI80kfIy7YgfGa4BX@dpg-coboi9tjm4es739spm6g-a.oregon-postgres.render.com/catholicsongs")
+# DATABASES['default']=dj_database_url.parse("postgres://catholicsongs_user:Y7KZ6imUeD26mPYxI80kfIy7YgfGa4BX@dpg-coboi9tjm4es739spm6g-a.oregon-postgres.render.com/catholicsongs")
 
 
 # Password validation
@@ -144,6 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
@@ -174,6 +175,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='Accounts.Users'
+DATA_UPLOAD_MAX_NUMBER_FILES = 500
+DATA_UPLOAD_MAX_MEMORY_SIZE = 26214400  # 25MB
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Change to AllowAny by default
+    ],
+}
+
 CLOUDINARY_STORAGE={
     'CLOUD_NAME':'dz7v9gwzd',
     'API_KEY':'782477351883355',
@@ -181,9 +194,9 @@ CLOUDINARY_STORAGE={
 }
 
 DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
-# STORAGES = {
-#     # ...
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }        
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}        

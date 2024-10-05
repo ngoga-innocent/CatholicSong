@@ -12,9 +12,14 @@ class SongType(models.Model):
 
     def __str__(self):
         return self.name
+class SongCategory(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
+    name=models.CharField(max_length=255,null=False,default='Others',unique=True)
+    def __str__(self):
+        return self.name
 def song_upload_path(instance, filename):
     # Get the category name
-    category_name = instance.category.name
+    category_name = instance.part.name
     # Replace spaces with underscores and ensure lowercase
     category_name = category_name.replace(' ', '_').lower()
     # Generate a unique filename
@@ -25,7 +30,7 @@ class Copies(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     name=models.CharField(max_length=255,null=False)
     composer=models.CharField(max_length=255,null=False)
-    part=models.CharField(max_length=255,default="Other")
+    part=models.ForeignKey(SongCategory,null=True,on_delete=models.CASCADE)
     uploader=models.ForeignKey(Users,on_delete=models.CASCADE,null=True,default='')
     document=models.FileField(upload_to=song_upload_path)
     category=models.ForeignKey(SongType,on_delete=models.CASCADE,null=True,default='')
