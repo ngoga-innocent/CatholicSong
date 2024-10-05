@@ -193,10 +193,16 @@ CLOUDINARY_STORAGE={
     "API_SECRET":'n03Zh44PD_N8aawgfpM4_aBImsw'
 }
 
-DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
 STORAGES = {
-    # ...
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
-}        
+}
+
+# Remove the DEFAULT_FILE_STORAGE line
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    
