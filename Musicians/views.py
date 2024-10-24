@@ -37,8 +37,10 @@ class MusicianView(APIView):
                 return Response({'detail':serializer.errors},status=status.HTTP_400_BAD_REQUEST)
             
         except Exception as e:
+            print(e)
             # logger.exception("An error occurred while processing the request: %s", str(e))
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            print(e)
+            return Response({'detail': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     def put(self,request):
         try:
             auth_token=request.META.get('HTTP_AUTHORIZATION')
